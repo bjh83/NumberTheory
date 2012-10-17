@@ -19,20 +19,21 @@ def extendedGcd(a, b):
 		a = b
 		b = c
 		swap = True
-	remainder = b
-	oldRemainder = b
+	newRemainder = b
+	remainder = a
+	oldRemainder = a
 	u = 0
 	v = 1
 	oldU = 1
 	oldV = 0
 	multiplier = 1
-	while remainder > 0:
+	while newRemainder > 0:
 		oldRemainder = remainder
-		toSubtract = u * a + v * b
-		multiplier = remainder / toSubtract
+		remainder = u * a + v * b
+		multiplier = oldRemainder / remainder
 		multiplier = math.floor(multiplier)
-		toSubtract *= multiplier
-		remainder -= toSubtract
+		remainder
+		newRemainder = oldRemainder - remainder * multiplier
 		newU = u * (- multiplier) + oldU
 		oldU = u
 		u = newU
@@ -40,8 +41,8 @@ def extendedGcd(a, b):
 		oldV = v
 		v = newV
 	if swap:
-		c = u
-		u = v
-		v = c
-	return (oldRemainder, u, v)
+		c = oldU
+		oldU = oldV
+		oldV = c
+	return (remainder, oldU, oldV)
 
